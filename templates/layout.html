@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PulseX Health Assistant</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #f0f4ff, #e6f2ff);
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav class="navbar">
+    <a href="/" class="logo-link">
+      <img src="{{ url_for('static', filename='mainlogo.png') }}" alt="PulseX Logo" class="logo-img" />
+    </a>
+    <div class="hamburger" onclick="toggleNav()">☰</div>
+    <div class="nav-links" id="navLinks">
+      <a href="/">Home</a>
+      <a href="/chatbot">Chatbot</a>
+      <a href="/medicine">Medicine</a>
+      <a href="/hospital">Hospital Locator</a>
+    </div>
+  </nav>
+</header>
+
+<main class="container">
+  {% block content %}
+  {% endblock %}
+</main>
+
+<script>
+  function toggleNav() {
+    const nav = document.getElementById("navLinks");
+    nav.classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>

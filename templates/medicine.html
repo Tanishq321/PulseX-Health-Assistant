@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="medicine-container">
+    <h2>💊 Medicine Recommender</h2>
+
+    <form method="POST" class="medicine-form">
+        <input type="text" name="symptom" placeholder="-- Enter symptoms --" class="medicine-input" required>
+        <button type="submit" class="recommend-btn">🔍 Recommend</button>
+    </form>
+
+    {% if error %}
+        <div class="error-message">
+            {{ error }}
+        </div>
+    {% elif recommendations %}
+        <h3 style="text-align: center; margin-top: 30px;">Recommended Medicines:</h3>
+
+        {% for item in recommendations %}
+            <div class="recommendation-card">
+                <h4>💊 {{ item.name }}</h4>
+                <p><strong>Reason:</strong> {{ item.reason }}</p>
+                <p><strong>Description:</strong> {{ item.description }}</p>
+            </div>
+        {% endfor %}
+
+        <!-- PDF Download Button -->
+        <form action="/download_pdf" method="post" style="text-align: center; margin-top: 30px;">
+            <input type="hidden" name="user_input" value="{{ user_input }}">
+            <button type="submit" class="recommend-btn">📄 Download PDF Report</button>
+        </form>
+    {% endif %}
+</div>
+
+{% endblock %}

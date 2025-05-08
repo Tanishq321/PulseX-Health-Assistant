@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="hospital-container">
+  <h2>🏥 Find Hospitals</h2>
+
+  <form method="POST" class="hospital-form">
+    <div class="form-group">
+      <label for="state">Select State:</label>
+      <select name="state" id="state" onchange="this.form.submit()" class="dropdown">
+        <option value="">-- Select State --</option>
+        {% for state in states %}
+          <option value="{{ state }}" {% if selected_state == state %}selected{% endif %}>{{ state }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    {% if cities %}
+    <div class="form-group">
+      <label for="city">Select City:</label>
+      <select name="city" id="city" class="dropdown">
+        <option value="">-- Select City --</option>
+        {% for city in cities %}
+          <option value="{{ city }}" {% if selected_city == city %}selected{% endif %}>{{ city }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <button type="submit" class="search-btn">🔍 Search</button>
+    {% endif %}
+  </form>
+
+  {% if hospitals %}
+  <h3>Hospitals in {{ selected_city }}</h3>
+  <div class="cards-container">
+    {% for hospital in hospitals %}
+    <div class="card">
+      <h4>{{ hospital.name }}</h4>
+      <p>{{ hospital.address }}</p>
+      <p>{{ hospital.stars }} ({{ hospital.rating }})</p>
+      {% if hospital.map_url %}
+      <p><a href="{{ hospital.map_url }}" target="_blank">📍 Open in Maps</a></p>
+      {% endif %}
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
+</div>
+{% endblock %}

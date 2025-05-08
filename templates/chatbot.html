@@ -1,0 +1,56 @@
+{% extends "layout.html" %}
+{% block content %}
+
+<div class="page-heading">
+  <h2>🤖 Chat with AI Assistant</h2>
+</div>
+
+<div class="chat-container">
+  <div class="chat-window" id="chat-window">
+    {% for sender, message in chat_history %}
+      {% if sender == "user" %}
+        <div class="chat-bubble user animate">
+          <div class="bubble-header">
+            <span class="emoji">🙋</span>
+            <span class="sender-label">You</span>
+          </div>
+          <p>{{ message }}</p>
+        </div>
+      {% else %}
+        <div class="chat-bubble assistant animate">
+          <div class="bubble-header">
+            <span class="emoji">🤖</span>
+            <span class="sender-label">AI</span>
+          </div>
+          <p>{{ message|safe }}</p>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+  <div id="typing-indicator" class="typing-indicator" style="display: none;">
+    🤖 AI is typing...
+  </div>
+
+  <form method="POST" class="chat-form">
+    <input type="text" name="prompt" placeholder="Type your message..." required autocomplete="off">
+    <button type="submit" title="Send">➤</button>
+  </form>
+</div>
+
+<script>
+  const chatWindow = document.getElementById('chat-window');
+  const typingIndicator = document.getElementById('typing-indicator');
+  const chatForm = document.querySelector('.chat-form');
+
+  chatForm.addEventListener('submit', () => {
+    typingIndicator.style.display = 'block';
+  });
+
+  window.onload = () => {
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+    typingIndicator.style.display = 'none';
+  };
+</script>
+
+{% endblock %}

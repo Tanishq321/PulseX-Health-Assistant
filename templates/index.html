@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="home-container">
+  <h1>🏥 Welcome to <span>PulseX Health Assistant</span></h1>
+  <p>Your Smart Guide to Health, Medicines, and Nearby Hospitals</p>
+
+  <div class="cards-home">
+    <a href="/chatbot" class="home-card">
+      <div class="emoji">🤖</div>
+      <h3>AI Chat Assistant</h3>
+      <p>Ask about symptoms, health advice, and more.</p>
+    </a>
+
+    <a href="/medicine" class="home-card">
+      <div class="emoji">💊</div>
+      <h3>Medicine Recommender</h3>
+      <p>Find the best medicines for your symptoms.</p>
+    </a>
+
+    <a href="/hospital" class="home-card">
+      <div class="emoji">🏥</div>
+      <h3>Hospital Locator</h3>
+      <p>Discover nearby hospitals quickly and easily.</p>
+    </a>
+  </div>
+</div>
+{% endblock %}
